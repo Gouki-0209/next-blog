@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  next:
+    build:      
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: next-container
+    hostname: next-server
+    tty: true
+    environment:
+      - PORT=3000
+      - WATCHPACK_POLLING=true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/app:/usr/src/app
+      - front_node_modules:/usr/src/node_modules
+
+volumes:
+  front_node_modules:
