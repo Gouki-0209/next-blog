@@ -7,9 +7,10 @@ if [ ! -e package.json ]; then
     yarn create next-app . --typescript #ここで本体のインストール
 fi
 
-yarn add -D prettier eslint-config-prettier
-yarn add remark remark-html gray-matter
-
+npm install gray-matter
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install marked
 
 yarn dev #開発するときはこれ
 
