@@ -10,7 +10,14 @@ fi
 npm install gray-matter
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
-npm install marked
+npm install unified remark-parse remark-rehype rehype-stringify
+npm install -D @tailwindcss/typography
+npm install next-seo
+npm install remark-toc
+npm install rehype-slug
+npm install remark-prism
+npm install rehype-parse rehype-react
+npm install remark-unwrap-images
 
 yarn dev #開発するときはこれ
 

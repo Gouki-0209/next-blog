@@ -1,9 +1,8 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import Link from 'next/link';
-import PostCard from '../components/PostCard';
+import PostCard from '../../components/PostCard';
 
-export const getStaticProps = () => {
+export const getStaticProps = ({ params }) => {
   const files = fs.readdirSync('posts');
   const posts = files.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
@@ -15,7 +14,13 @@ export const getStaticProps = () => {
     };
   });
 
-  const sortedPosts = posts.sort((postA, postB) =>
+  const category = params.category;
+
+  const filteredPosts = posts.filter((post) => {
+    return post.frontMatter.categories.includes(category);
+  });
+
+  const sortedPosts = filteredPosts.sort((postA, postB) =>
     new Date(postA.frontMatter.date) > new Date(postB.frontMatter.date) ? -1 : 1
   );
 
@@ -26,7 +31,17 @@ export const getStaticProps = () => {
   };
 };
 
-export default function Home({ posts }) {
+export const getStaticPaths = () => {
+  const categories = ['react', 'laravel'];
+  const paths = categories.map((category) => ({ params: { category } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+const Category = ({ posts }) => {
   return (
     <div className="my-8">
       <div className="grid grid-cols-3 gap-4">
@@ -36,4 +51,6 @@ export default function Home({ posts }) {
       </div>
     </div>
   );
-}
+};
+
+export default Category;

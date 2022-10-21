@@ -24,6 +24,15 @@ a {
     background: black;
   }
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:target::before {
+  content: '';
+  display: block;
+  height: 72px;
+  margin-top: -72px;
+  visibility: hidden;
+}
