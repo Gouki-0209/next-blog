@@ -16,7 +16,8 @@ import Link from 'next/link';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { toc } from 'mdast-util-toc';
 
-export async function getStaticProps({ params }) {
+
+export async function getServerSideProps({ params }) {
   const file = fs.readFileSync(`posts/${params.slug}.md`, 'utf-8');
   const { data, content } = matter(file);
   const toc = await unified()
@@ -54,18 +55,18 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export async function getStaticPaths() {
-  const files = fs.readdirSync('posts');
-  const paths = files.map((fileName) => ({
-    params: {
-      slug: fileName.replace(/\.md$/, ''),
-    },
-  }));
-  return {
-    paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   const files = fs.readdirSync('posts');
+//   const paths = files.map((fileName) => ({
+//     params: {
+//       slug: fileName.replace(/\.md$/, ''),
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
 const getToc = (options) => {
   return (node) => {
