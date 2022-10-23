@@ -8,7 +8,7 @@ categories: ['react']
 
 ## 目次
 
-Next.js を使って Markdown のブログサイトの構築を一から行なっていきます。
+Next.jsを使ってMarkdownのブログサイトの構築を一から行なっていきます。
 
 ## Next.js の準備
 
@@ -16,7 +16,7 @@ Next.js を使って Markdown のブログサイトの構築を一から行な�
 
 [記事一覧](/)
 
-npx create-next-app コマンドを利用して Next.js プロジェクトの作成を行います。
+npx create-next-appコマンドを利用してNext.jsプロジェクトの作成を行います。
 
 ```js[class="line-numbers"]
 import Layout from '../components/layout';

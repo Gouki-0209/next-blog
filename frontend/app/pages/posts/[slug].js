@@ -11,7 +11,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkPrism from 'remark-prism';
 import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
-import { createElement, Fragment ,useEffect, useState} from 'react';
+import { createElement, Fragment} from 'react';
 import Link from 'next/link';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { toc } from 'mdast-util-toc';
@@ -19,7 +19,16 @@ import { toc } from 'mdast-util-toc';
 export async function getStaticProps({ params }) {
   const file = fs.readFileSync(`posts/${params.slug}.md`, 'utf-8');
   const { data, content } = matter(file);
-
+  const toc = await unified()
+    .use(remarkParse)
+    .use(getToc, {
+      heading: '目次',
+      tight: true,
+    })
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .process(content);
+    
   const result = await unified()
     .use(remarkParse)
     .use(remarkPrism, {
@@ -29,25 +38,20 @@ export async function getStaticProps({ params }) {
       heading: '目次',
       tight: true,
     })
-    .use(getToc, {
-      heading: '目次',
-      tight: true,
-    })
     .use(remarkUnwrapImages)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSlug)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
-  
 
-    return {
-      props: {
-        frontMatter: data,
-        content: result.toString(),
-        toc: toc.toString(), //追加
-        slug: params.slug,
-      },
-    };
+  return {
+    props: {
+      frontMatter: data,
+      content: result.toString(),
+      toc: toc.toString(), //追加
+      slug: params.slug,
+    },
+  };
 }
 
 export async function getStaticPaths() {
@@ -86,6 +90,7 @@ const toReactNode = (content) => {
     .processSync(content).result;
 };
 
+
 function MyLink({ children, href }) {
   if (href === '') href = '/';
   return href.startsWith('/') || href.startsWith('#') ? (
@@ -107,7 +112,7 @@ const MyImage = ({ src, alt }) => {
   );
 };
 
-const Post = ({ frontMatter, content, slug }) => {
+const Post = ({ frontMatter, content, toc, slug }) => {
   return (
     <>
       <NextSeo
@@ -115,12 +120,12 @@ const Post = ({ frontMatter, content, slug }) => {
         description={frontMatter.description}
         openGraph={{
           type: 'website',
-          url: `http:localhost:3000/posts/${slug}`,
+          url: `https://gouki.munenick.me/posts/${slug}`,
           title: frontMatter.title,
           description: frontMatter.description,
           images: [
             {
-              url: `https://localhost:3000/${frontMatter.image}`,
+              url: `https://gouki.munenick.me/${frontMatter.image}`,
               width: 1200,
               height: 700,
               alt: frontMatter.title,
@@ -129,17 +134,17 @@ const Post = ({ frontMatter, content, slug }) => {
         }}
       />
       <div className="prose prose-lg max-w-none">
-        <div className="border">
-          <Image
-            src={`/${frontMatter.image}`}
-            width={1200}
-            height={700}
-            alt={frontMatter.title}
-          />
-        </div>
-        <h1 className="mt-12">{frontMatter.title}</h1>
-        <span>{frontMatter.date}</span>
-        <div className="space-x-2">
+      <div className="border">
+        <Image
+          src={`/${frontMatter.image}`}
+          width={1200}
+          height={700}
+          alt={frontMatter.title}
+        />
+      </div>
+      <h1 className="mt-12">{frontMatter.title}</h1>
+      <span>{frontMatter.date}</span>
+      <div className="space-x-2">
         {frontMatter.categories.map((category) => (
           <span key={category}>
             <Link href={`/categories/${category}`}>
@@ -147,9 +152,17 @@ const Post = ({ frontMatter, content, slug }) => {
             </Link>
           </span>
         ))}
-        </div>
-        {toReactNode(content)}　//変更
       </div>
+      <div className="grid grid-cols-12">
+        <div className="col-span-9">{toReactNode(content)}</div>
+        <div className="col-span-3">
+          <div
+            className="sticky top-[50px]"
+            dangerouslySetInnerHTML={{ __html: toc }}
+          ></div>
+        </div>
+      </div>
+    </div>
     </>
   );
 };
