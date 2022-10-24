@@ -2,11 +2,11 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import PostCard from '../../components/PostCard';
 
-export const getStaticProps = ({ params }) => {
-  const files = fs.readdirSync('posts');
+export const getServerSideProps = ({ params }) => {
+  const files = fs.readdirSync('data/blog');
   const posts = files.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
-    const fileContent = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+    const fileContent = fs.readFileSync(`data/blog/${fileName}`, 'utf-8');
     const { data } = matter(fileContent);
     return {
       frontMatter: data,
@@ -31,15 +31,15 @@ export const getStaticProps = ({ params }) => {
   };
 };
 
-export const getStaticPaths = () => {
-  const categories = ['react', 'laravel'];
-  const paths = categories.map((category) => ({ params: { category } }));
+// export const getStaticPaths = () => {
+//   const categories = ['react', 'laravel'];
+//   const paths = categories.map((category) => ({ params: { category } }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 const Category = ({ posts }) => {
   return (

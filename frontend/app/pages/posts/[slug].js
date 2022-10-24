@@ -18,7 +18,7 @@ import { toc } from 'mdast-util-toc';
 
 
 export async function getServerSideProps({ params }) {
-  const file = fs.readFileSync(`posts/${params.slug}.md`, 'utf-8');
+  const file = fs.readFileSync(`data/blog/${params.slug}.md`, 'utf-8');
   const { data, content } = matter(file);
   const toc = await unified()
     .use(remarkParse)
@@ -137,7 +137,7 @@ const Post = ({ frontMatter, content, toc, slug }) => {
       <div className="prose prose-lg max-w-none">
       <div className="border">
         <Image
-          src={`/${frontMatter.image}`}
+          src={`/static/images/${frontMatter.image}`}
           width={1200}
           height={700}
           alt={frontMatter.title}

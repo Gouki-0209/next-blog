@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
       <a>
         <div className="border rounded-lg">
           <Image
-            src={`/${post.frontMatter.image}`}
+            src={`/static/images/${post.frontMatter.image}`}
             width={1200}
             height={700}
             alt={post.frontMatter.title}
