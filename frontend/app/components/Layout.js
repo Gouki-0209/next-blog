@@ -1,6 +1,6 @@
 import Footer from './Footer';
 import SectionContainer from './SectionContainer';
-import Link from 'next/link'
+import Link from '../components/Link';
 import siteMetadata from '../data/siteMetadata';
 import headerNavLinks from '../data/headerNavLinks';
 import MobileNav from './MobileNav';

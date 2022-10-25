@@ -1,6 +1,5 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import Link from 'next/link';
 import PostCard from '../components/PostCard';
 
 type Props = {
@@ -32,12 +31,12 @@ export const getServerSideProps = () => {
 
 export default function Home({ posts }: Props) {
   return (
-      <div className="my-8">
-        <div className="grid grid-cols-3 gap-4">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
+    <div className="my-8">
+      <div className="grid grid-cols-3 gap-4">
+        {posts.map((post) => (
+          <PostCard key={post.slug} post={post} />
+        ))}
       </div>
+    </div>
   )
 }

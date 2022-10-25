@@ -4,7 +4,7 @@ const siteMetadata = {
     headerTitle: 'Technology Pass',
     description: 'A blog created with Next.js and Tailwind.css',
     language: 'ja',
-    theme: 'system', // system, dark or light
+    theme: 'light', // system, dark or light
     siteUrl: 'https://gouki.munenick.me/',
     siteRepo: 'https://github.com/Gouki-0209/next-blog',
     siteLogo: '/static/images/logo.png',

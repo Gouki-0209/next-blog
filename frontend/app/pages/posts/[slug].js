@@ -15,6 +15,7 @@ import { createElement, Fragment} from 'react';
 import Link from 'next/link';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { toc } from 'mdast-util-toc';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 
 export async function getServerSideProps({ params }) {
@@ -154,15 +155,20 @@ const Post = ({ frontMatter, content, toc, slug }) => {
           </span>
         ))}
       </div>
-      <div className="grid grid-cols-12">
-        <div className="col-span-9">{toReactNode(content)}</div>
-        <div className="col-span-3">
-          <div
-            className="sticky top-[50px]"
-            dangerouslySetInnerHTML={{ __html: toc }}
-          ></div>
+      <BrowserView>
+        <div className="grid grid-cols-12">
+          <div className="col-span-9">{toReactNode(content)}</div>
+          <div className="col-span-3">
+            <div
+              className="sticky top-[50px]"
+              dangerouslySetInnerHTML={{ __html: toc }}
+            ></div>
+          </div>
         </div>
-      </div>
+      </BrowserView>
+      <MobileView>
+        {toReactNode(content)}
+      </MobileView>
     </div>
     </>
   );
