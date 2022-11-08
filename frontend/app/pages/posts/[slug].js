@@ -16,6 +16,7 @@ import Link from 'next/link';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { toc } from 'mdast-util-toc';
 import { BrowserView, MobileView } from 'react-device-detect';
+import QuickButton from '../../components/QuickButton'
 
 
 export async function getServerSideProps({ params }) {
@@ -169,7 +170,8 @@ const Post = ({ frontMatter, content, toc, slug }) => {
       <MobileView>
         {toReactNode(content)}
       </MobileView>
-    </div>
+      </div>
+      <QuickButton/>
     </>
   );
 };

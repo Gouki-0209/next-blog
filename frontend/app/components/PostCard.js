@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 const PostCard = ({ post }) => {
   return (
