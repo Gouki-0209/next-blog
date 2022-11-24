@@ -45,6 +45,7 @@ done < /packages.txt
 # npm install image-size
 # npm install react-device-detect --save
  
+# yarn upgrade --latest
 
 # yarn install
 

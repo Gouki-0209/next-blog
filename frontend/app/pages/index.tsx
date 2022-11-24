@@ -2,6 +2,8 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import PostCard from '../components/PostCard';
 
+const DEFAULT_POSTCARD = 'CreatePostImage'
+
 export const getServerSideProps = () => {
   const files = fs.readdirSync('data/blog');
   const posts = files.map((fileName) => {
@@ -28,7 +30,7 @@ export const getServerSideProps = () => {
 export default function Home({ posts }) {
   return (
     <div className="my-8">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}

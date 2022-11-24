@@ -44,7 +44,7 @@ export const getServerSideProps = ({ params }) => {
 const Category = ({ posts }) => {
   return (
     <div className="my-8">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 lg:grid-cols-3 gap-4">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}

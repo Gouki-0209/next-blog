@@ -3,7 +3,7 @@ title: 'Laravelのデフォルトのフロントエンドアセットバンド�
 date: '2022-07-12'
 description: 'LaravelのデフォルトのフロントエンドアセットバンドラーはViteに変更したので動作確認をしています。'
 image: laravel.png
-categories : ['react']
+categories : ['react', 'setup']
 ---
 
 LaravelのデフォルトのフロントエンドアセットバンドラーがViteに変更になったので動作確認を行います。
