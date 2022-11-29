@@ -16,7 +16,7 @@ import Link from 'next/link';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import { toc } from 'mdast-util-toc';
 import { BrowserView, MobileView } from 'react-device-detect';
-import QuickButton from '../../components/QuickButton'
+import QuickButton from '../../components/QuickButton';
 
 
 export async function getServerSideProps({ params }) {
@@ -77,7 +77,7 @@ export async function getServerSideProps({ params }) {
       content: result.toString(),
       toc: toc.toString(), //追加
       slug: params.slug,
-      catePosts: sortedPosts
+      catePosts: sortedPosts,
     },
   };
 }
@@ -161,12 +161,18 @@ const Post = ({ frontMatter, content, toc, slug, catePosts }) => {
       />
       <div className="prose prose-lg max-w-none">
       <div className="border">
-        <Image
-          src={`/static/images/${frontMatter.image}`}
-          width={1200}
-          height={700}
-          alt={frontMatter.title}
-        />
+      <>
+        {frontMatter.image ? (
+          <Image
+            src={`/static/images/${frontMatter.image}`}
+            width={1200}
+            height={700}
+            alt={frontMatter.title}
+          />
+        ) : (
+          <></>
+        )}
+      </>
       </div>
       <h1 className="mt-12">{frontMatter.title}</h1>
       <span>{frontMatter.date}</span>

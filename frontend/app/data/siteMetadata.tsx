@@ -22,6 +22,6 @@ const siteMetadata = {
       googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
       posthogAnalyticsId: '', // posthog.init e.g. phc_5yXvArzvRdqtZIsHkEm3Fkkhm3d0bEYUXCaFISzqPSQ
     },
-  }
+}
   
-  module.exports = siteMetadata
+export default siteMetadata

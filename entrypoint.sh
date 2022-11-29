@@ -44,6 +44,7 @@ done < /packages.txt
 # npm install rehype-preset-minify
 # npm install image-size
 # npm install react-device-detect --save
+npm i @vercel/og
  
 # yarn upgrade --latest
 

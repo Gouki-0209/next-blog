@@ -1,8 +1,13 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import PostCard from '../../components/PostCard';
+import type {
+  NextPage,
+  GetServerSideProps,
+  GetServerSidePropsContext,
+} from "next";
 
-export const getServerSideProps = ({ params }) => {
+export const getServerSideProps = async ({params}) => {
   const files = fs.readdirSync('data/blog');
   const posts = files.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
@@ -41,7 +46,12 @@ export const getServerSideProps = ({ params }) => {
 //   };
 // };
 
-const Category = ({ posts }) => {
+type Props = {
+  posts : any;
+  baseUrl: string;
+};
+
+const Category: NextPage<Props> = ({ posts}) => {
   return (
     <div className="my-8">
       <div className="grid grid-cols-3 lg:grid-cols-3 gap-4">
