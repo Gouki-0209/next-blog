@@ -1,7 +1,7 @@
 const siteMetadata = {
-    title: 'Technology Pass',
+    title: 'Techno Pass',
     author: 'GCCrafter',
-    headerTitle: 'Technology Pass',
+    headerTitle: 'Techno Pass',
     description: 'A blog created with Next.js and Tailwind.css',
     language: 'ja',
     theme: 'light', // system, dark or light

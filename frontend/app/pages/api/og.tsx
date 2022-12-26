@@ -12,6 +12,11 @@ export default async function ogp(req: NextRequest) {
     const title = hasTitle
       ? searchParams.get('title')?.slice(0, 100)
       : 'My default title';
+    const hasDate = searchParams.has('date');
+    const date = hasDate
+      ? searchParams.get('date')
+      : 'unknowwn';
+
 
     return new ImageResponse(
       (
@@ -28,9 +33,9 @@ export default async function ogp(req: NextRequest) {
             textAlign: "center",
             alignItems: "center",
             justifyContent: "center",
-            color: "white",
-            textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            position: "relative",
+            // color: "white",
+            // textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            // position: "relative",
           }}
         >
           <h2
@@ -61,7 +66,7 @@ export default async function ogp(req: NextRequest) {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              2022.10.22
+              {date}
             </h2>
           </div>
         </div>

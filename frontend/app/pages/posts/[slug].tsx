@@ -139,6 +139,7 @@ const MyImage = ({ src, alt }) => {
 };
 
 const Post = ({ frontMatter, content, toc, slug, catePosts }) => {
+  
   return (
     <>
       <NextSeo
@@ -160,20 +161,21 @@ const Post = ({ frontMatter, content, toc, slug, catePosts }) => {
         }}
       />
       <div className="prose prose-lg max-w-none">
-      <div className="border">
+      
       <>
         {frontMatter.image ? (
-          <Image
-            src={`/static/images/${frontMatter.image}`}
-            width={1200}
-            height={700}
-            alt={frontMatter.title}
-          />
+          <div className="border">
+            <Image
+              src={`/static/images/${frontMatter.image}`}
+              width={1200}
+              height={700}
+              alt={frontMatter.title}
+            />
+          </div>      
         ) : (
           <></>
         )}
       </>
-      </div>
       <h1 className="mt-12">{frontMatter.title}</h1>
       <span>{frontMatter.date}</span>
       <div className="space-x-2">

@@ -46,6 +46,7 @@ done < /packages.txt
 # npm install react-device-detect --save
 npm i @vercel/og
  
+# yarn install --latest
 # yarn upgrade --latest
 
 # yarn install

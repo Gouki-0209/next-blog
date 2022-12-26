@@ -38,8 +38,8 @@ type Props = {
 const Home: NextPage<Props> = ({ posts}) => {
   return (
     <div className="my-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {posts.map((post) => (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {posts.map((post : any) => (
           <PostCard key={post.slug} post={post} />
         ))}
       </div>

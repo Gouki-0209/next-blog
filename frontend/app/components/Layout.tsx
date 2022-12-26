@@ -5,6 +5,7 @@ import siteMetadata from '../data/siteMetadata';
 import headerNavLinks from '../data/headerNavLinks';
 import MobileNav from './MobileNav';
 import Logo from '../data/logo.svg';
+import Image from 'next/image';
 
 export default function Layout({ children }) {
   return (
@@ -17,13 +18,20 @@ export default function Layout({ children }) {
                 <div className="mr-3">
                   <Logo />
                 </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
+                <Image
+                  src={`/static/images/titleLogo.png`}
+                  width={250}
+                  height={100}
+                  alt={"titleLogo"}
+                  className="drop-shadow hover:drop-shadow-lg hover:shadow-indigo-500/50"
+                />
+                {/* {typeof siteMetadata.headerTitle === 'string' ? (
                   <div className="hidden h-6 text-2xl font-semibold sm:block">
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
                   siteMetadata.headerTitle
-                )}
+                )} */}
               </div>
             </Link>
           </div>
@@ -33,7 +41,7 @@ export default function Layout({ children }) {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 hover:text-[17px]"
                 >
                   {link.title}
                 </Link>

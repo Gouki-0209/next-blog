@@ -32,6 +32,7 @@ export const getServerSideProps = async ({params}) => {
   return {
     props: {
       posts: sortedPosts,
+      cateName: category,
     },
   };
 };
@@ -48,18 +49,26 @@ export const getServerSideProps = async ({params}) => {
 
 type Props = {
   posts : any;
+  cateName: any;
   baseUrl: string;
 };
 
-const Category: NextPage<Props> = ({ posts}) => {
+const Category: NextPage<Props> = ({ posts, cateName }) => {
   return (
-    <div className="my-8">
-      <div className="grid grid-cols-3 lg:grid-cols-3 gap-4">
-        {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
+    <>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+          <h2 className="text-3xl leading-9 font-extrabold md:text-5xl md:leading-14">
+            {cateName}
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 pb-8">
+          {posts.map((post : any) => (
+            <PostCard key={post.slug} post={post} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
